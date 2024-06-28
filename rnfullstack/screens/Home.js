@@ -1,4 +1,4 @@
-import { View, Text, FlatList, ActivityIndicator } from 'react-native';
+import { View, Text, Image, FlatList, ActivityIndicator } from 'react-native';
 import React, { useState, useEffect } from 'react';
 
 const Home = () => {
@@ -20,17 +20,23 @@ const Home = () => {
 
   const renderItem = ({ item }) => (
     <View>
+      <Image source={{ uri: item.menu_image }}
+        style={{ width: "100%", height: 333 }}/>
       <Text>{item.menu_name}</Text>
     </View>
   );
 
   return (
     <View>
-      <FlatList
-       data={items}
-       renderItem={renderItem}
-       keyExtractor={item => item.menu_id}
-      />
+      {isLoading ? (
+        <ActivityIndicator size="large" color="#0000ff" />
+      ) : (
+        <FlatList
+          data={items}
+          renderItem={renderItem}
+          keyExtractor={item => item.menu_id}
+        />
+      )}
     </View>
   );
 };

@@ -5,6 +5,7 @@ MERGED from D:\Maifun's Project\fs-mobile\rnfullstack\android\app\src\main\Andro
 INJECTED from D:\Maifun's Project\fs-mobile\rnfullstack\android\app\src\debug\AndroidManifest.xml:2:1-9:12
 INJECTED from D:\Maifun's Project\fs-mobile\rnfullstack\android\app\src\debug\AndroidManifest.xml:2:1-9:12
 INJECTED from D:\Maifun's Project\fs-mobile\rnfullstack\android\app\src\debug\AndroidManifest.xml:2:1-9:12
+MERGED from [:react-native-gesture-handler] D:\Maifun's Project\fs-mobile\rnfullstack\node_modules\react-native-gesture-handler\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-7:12
 MERGED from [:react-native-safe-area-context] D:\Maifun's Project\fs-mobile\rnfullstack\node_modules\react-native-safe-area-context\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-7:12
 MERGED from [:react-native-screens] D:\Maifun's Project\fs-mobile\rnfullstack\node_modules\react-native-screens\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-7:12
 MERGED from [com.facebook.react:react-android:0.74.2] C:\Users\ASUS\.gradle\caches\transforms-4\716f968cc1e5225035406d1e56ec874f\transformed\jetified-react-android-0.74.2-debug\AndroidManifest.xml:2:1-24:12
@@ -161,6 +162,8 @@ uses-sdk
 INJECTED from D:\Maifun's Project\fs-mobile\rnfullstack\android\app\src\debug\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from D:\Maifun's Project\fs-mobile\rnfullstack\android\app\src\debug\AndroidManifest.xml
 INJECTED from D:\Maifun's Project\fs-mobile\rnfullstack\android\app\src\debug\AndroidManifest.xml
+MERGED from [:react-native-gesture-handler] D:\Maifun's Project\fs-mobile\rnfullstack\node_modules\react-native-gesture-handler\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:react-native-gesture-handler] D:\Maifun's Project\fs-mobile\rnfullstack\node_modules\react-native-gesture-handler\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:react-native-safe-area-context] D:\Maifun's Project\fs-mobile\rnfullstack\node_modules\react-native-safe-area-context\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:react-native-safe-area-context] D:\Maifun's Project\fs-mobile\rnfullstack\node_modules\react-native-safe-area-context\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:react-native-screens] D:\Maifun's Project\fs-mobile\rnfullstack\node_modules\react-native-screens\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
