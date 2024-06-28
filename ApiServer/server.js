@@ -22,9 +22,18 @@ app.get('/api/food_database', function (req, res, next) {
       res.json(results);
     }
   );
-});
+})
 
-
+app.get('/api/food_database/:menu_id', function (req, res, next) {
+  const menu_id = req.params.menu_id
+  connection.query(
+    'SELECT * FROM menus WHERE menu_id = ?',
+    [menu_id],
+    function(err, results) {
+      res.json(results[0]);
+    }
+  );
+})
 app.listen(5000, function () {
   console.log('CORS-enabled web server listening on port 5000')
 })
