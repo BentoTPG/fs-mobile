@@ -7,22 +7,26 @@ import Detail from './screens/Detail';
 
 const Stack = createNativeStackNavigator();
 
-const App = () => {
+function MyStack() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="Home"
-          component={Home}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Detail"
-          component={Detail}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Home"
+        component={Home}
+        options={{ headerShown: true }}
+      />
+      <Stack.Screen
+        name="Detail"
+        component={Detail}
+      />
+    </Stack.Navigator>
   );
 }
 
-export default App;
+export default function App() {
+  return (
+    <NavigationContainer>
+      <MyStack />
+    </NavigationContainer>
+  );
+}
