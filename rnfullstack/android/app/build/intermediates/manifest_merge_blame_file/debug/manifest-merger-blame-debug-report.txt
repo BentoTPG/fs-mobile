@@ -9,8 +9,8 @@
 9        android:targetSdkVersion="34" />
 10
 11    <uses-permission android:name="android.permission.INTERNET" />
-11-->D:\Maifun's Project\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:3:5-67
-11-->D:\Maifun's Project\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:3:22-64
+11-->D:\New folder\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:3:5-67
+11-->D:\New folder\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:3:22-64
 12    <!--
 13    This manifest file is used only by Gradle to configure debug-only capabilities
 14    for React Native Apps.
@@ -31,48 +31,48 @@
 22-->[androidx.core:core:1.9.0] C:\Users\ASUS\.gradle\caches\transforms-4\6621c239d1e00abea0752787fff99403\transformed\core-1.9.0\AndroidManifest.xml:26:22-94
 23
 24    <application
-24-->D:\Maifun's Project\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:5:5-24:19
+24-->D:\New folder\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:5:5-24:19
 25        android:name="com.rnfullstack.MainApplication"
-25-->D:\Maifun's Project\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:6:7-38
+25-->D:\New folder\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:6:7-38
 26        android:allowBackup="false"
-26-->D:\Maifun's Project\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:10:7-34
+26-->D:\New folder\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:10:7-34
 27        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
 27-->[androidx.core:core:1.9.0] C:\Users\ASUS\.gradle\caches\transforms-4\6621c239d1e00abea0752787fff99403\transformed\core-1.9.0\AndroidManifest.xml:28:18-86
 28        android:debuggable="true"
 29        android:extractNativeLibs="false"
 30        android:icon="@mipmap/ic_launcher"
-30-->D:\Maifun's Project\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:8:7-41
+30-->D:\New folder\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:8:7-41
 31        android:label="@string/app_name"
-31-->D:\Maifun's Project\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:7:7-39
+31-->D:\New folder\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:7:7-39
 32        android:roundIcon="@mipmap/ic_launcher_round"
-32-->D:\Maifun's Project\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:9:7-52
+32-->D:\New folder\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:9:7-52
 33        android:theme="@style/AppTheme"
-33-->D:\Maifun's Project\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:11:7-38
+33-->D:\New folder\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:11:7-38
 34        android:usesCleartextTraffic="true" >
-34-->D:\Maifun's Project\fs-mobile\rnfullstack\android\app\src\debug\AndroidManifest.xml:6:9-44
+34-->D:\New folder\fs-mobile\rnfullstack\android\app\src\debug\AndroidManifest.xml:6:9-44
 35        <activity
-35-->D:\Maifun's Project\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:12:7-23:18
+35-->D:\New folder\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:12:7-23:18
 36            android:name="com.rnfullstack.MainActivity"
-36-->D:\Maifun's Project\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:13:9-37
+36-->D:\New folder\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:13:9-37
 37            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|uiMode"
-37-->D:\Maifun's Project\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:15:9-118
+37-->D:\New folder\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:15:9-118
 38            android:exported="true"
-38-->D:\Maifun's Project\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:18:9-32
+38-->D:\New folder\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:18:9-32
 39            android:label="@string/app_name"
-39-->D:\Maifun's Project\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:14:9-41
+39-->D:\New folder\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:14:9-41
 40            android:launchMode="singleTask"
-40-->D:\Maifun's Project\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:16:9-40
+40-->D:\New folder\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:16:9-40
 41            android:windowSoftInputMode="adjustResize" >
-41-->D:\Maifun's Project\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:17:9-51
+41-->D:\New folder\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:17:9-51
 42            <intent-filter>
-42-->D:\Maifun's Project\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:19:9-22:25
+42-->D:\New folder\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:19:9-22:25
 43                <action android:name="android.intent.action.MAIN" />
-43-->D:\Maifun's Project\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:20:13-65
-43-->D:\Maifun's Project\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:20:21-62
+43-->D:\New folder\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:20:13-65
+43-->D:\New folder\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:20:21-62
 44
 45                <category android:name="android.intent.category.LAUNCHER" />
-45-->D:\Maifun's Project\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:21:13-73
-45-->D:\Maifun's Project\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:21:23-70
+45-->D:\New folder\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:21:13-73
+45-->D:\New folder\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:21:23-70
 46            </intent-filter>
 47        </activity>
 48        <activity

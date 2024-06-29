@@ -1,13 +1,13 @@
 -- Merging decision tree log ---
 manifest
-ADDED from D:\Maifun's Project\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:1:1-25:12
-MERGED from D:\Maifun's Project\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:1:1-25:12
-INJECTED from D:\Maifun's Project\fs-mobile\rnfullstack\android\app\src\debug\AndroidManifest.xml:2:1-9:12
-INJECTED from D:\Maifun's Project\fs-mobile\rnfullstack\android\app\src\debug\AndroidManifest.xml:2:1-9:12
-INJECTED from D:\Maifun's Project\fs-mobile\rnfullstack\android\app\src\debug\AndroidManifest.xml:2:1-9:12
-MERGED from [:react-native-gesture-handler] D:\Maifun's Project\fs-mobile\rnfullstack\node_modules\react-native-gesture-handler\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-7:12
-MERGED from [:react-native-safe-area-context] D:\Maifun's Project\fs-mobile\rnfullstack\node_modules\react-native-safe-area-context\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-7:12
-MERGED from [:react-native-screens] D:\Maifun's Project\fs-mobile\rnfullstack\node_modules\react-native-screens\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-7:12
+ADDED from D:\New folder\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:1:1-25:12
+MERGED from D:\New folder\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:1:1-25:12
+INJECTED from D:\New folder\fs-mobile\rnfullstack\android\app\src\debug\AndroidManifest.xml:2:1-9:12
+INJECTED from D:\New folder\fs-mobile\rnfullstack\android\app\src\debug\AndroidManifest.xml:2:1-9:12
+INJECTED from D:\New folder\fs-mobile\rnfullstack\android\app\src\debug\AndroidManifest.xml:2:1-9:12
+MERGED from [:react-native-gesture-handler] D:\New folder\fs-mobile\rnfullstack\node_modules\react-native-gesture-handler\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-7:12
+MERGED from [:react-native-safe-area-context] D:\New folder\fs-mobile\rnfullstack\node_modules\react-native-safe-area-context\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-7:12
+MERGED from [:react-native-screens] D:\New folder\fs-mobile\rnfullstack\node_modules\react-native-screens\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-7:12
 MERGED from [com.facebook.react:react-android:0.74.2] C:\Users\ASUS\.gradle\caches\transforms-4\716f968cc1e5225035406d1e56ec874f\transformed\jetified-react-android-0.74.2-debug\AndroidManifest.xml:2:1-24:12
 MERGED from [androidx.appcompat:appcompat-resources:1.6.1] C:\Users\ASUS\.gradle\caches\transforms-4\bcd1aaab3390fd5a0905d07d3a934f98\transformed\jetified-appcompat-resources-1.6.1\AndroidManifest.xml:17:1-22:12
 MERGED from [com.google.android.material:material:1.6.1] C:\Users\ASUS\.gradle\caches\transforms-4\452ffdcf9637ac22e3426671d55dd6fb\transformed\material-1.6.1\AndroidManifest.xml:17:1-26:12
@@ -70,24 +70,24 @@ MERGED from [androidx.annotation:annotation-experimental:1.3.0] C:\Users\ASUS\.g
 MERGED from [com.facebook.fbjni:fbjni:0.6.0] C:\Users\ASUS\.gradle\caches\transforms-4\c7e26f7d3c2fc1a6636ff1467fc77795\transformed\jetified-fbjni-0.6.0\AndroidManifest.xml:2:1-7:12
 MERGED from [com.facebook.soloader:soloader:0.10.5] C:\Users\ASUS\.gradle\caches\transforms-4\c5277b14eec9cc4a12d0fb10c9f8e27e\transformed\jetified-soloader-0.10.5\AndroidManifest.xml:2:1-17:12
 	package
-		INJECTED from D:\Maifun's Project\fs-mobile\rnfullstack\android\app\src\debug\AndroidManifest.xml
+		INJECTED from D:\New folder\fs-mobile\rnfullstack\android\app\src\debug\AndroidManifest.xml
 	android:versionName
-		INJECTED from D:\Maifun's Project\fs-mobile\rnfullstack\android\app\src\debug\AndroidManifest.xml
+		INJECTED from D:\New folder\fs-mobile\rnfullstack\android\app\src\debug\AndroidManifest.xml
 	xmlns:tools
-		ADDED from D:\Maifun's Project\fs-mobile\rnfullstack\android\app\src\debug\AndroidManifest.xml:3:5-51
+		ADDED from D:\New folder\fs-mobile\rnfullstack\android\app\src\debug\AndroidManifest.xml:3:5-51
 	android:versionCode
-		INJECTED from D:\Maifun's Project\fs-mobile\rnfullstack\android\app\src\debug\AndroidManifest.xml
+		INJECTED from D:\New folder\fs-mobile\rnfullstack\android\app\src\debug\AndroidManifest.xml
 	xmlns:android
-		ADDED from D:\Maifun's Project\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:1:11-69
+		ADDED from D:\New folder\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:1:11-69
 uses-permission#android.permission.INTERNET
-ADDED from D:\Maifun's Project\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:3:5-67
+ADDED from D:\New folder\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:3:5-67
 	android:name
-		ADDED from D:\Maifun's Project\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:3:22-64
+		ADDED from D:\New folder\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:3:22-64
 application
-ADDED from D:\Maifun's Project\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:5:5-24:19
-MERGED from D:\Maifun's Project\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:5:5-24:19
-MERGED from D:\Maifun's Project\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:5:5-24:19
-INJECTED from D:\Maifun's Project\fs-mobile\rnfullstack\android\app\src\debug\AndroidManifest.xml:5:5-8:50
+ADDED from D:\New folder\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:5:5-24:19
+MERGED from D:\New folder\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:5:5-24:19
+MERGED from D:\New folder\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:5:5-24:19
+INJECTED from D:\New folder\fs-mobile\rnfullstack\android\app\src\debug\AndroidManifest.xml:5:5-8:50
 MERGED from [com.facebook.react:react-android:0.74.2] C:\Users\ASUS\.gradle\caches\transforms-4\716f968cc1e5225035406d1e56ec874f\transformed\jetified-react-android-0.74.2-debug\AndroidManifest.xml:18:5-22:19
 MERGED from [com.facebook.react:react-android:0.74.2] C:\Users\ASUS\.gradle\caches\transforms-4\716f968cc1e5225035406d1e56ec874f\transformed\jetified-react-android-0.74.2-debug\AndroidManifest.xml:18:5-22:19
 MERGED from [com.google.android.material:material:1.6.1] C:\Users\ASUS\.gradle\caches\transforms-4\452ffdcf9637ac22e3426671d55dd6fb\transformed\material-1.6.1\AndroidManifest.xml:24:5-20
@@ -107,67 +107,67 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\AS
 MERGED from [com.facebook.soloader:soloader:0.10.5] C:\Users\ASUS\.gradle\caches\transforms-4\c5277b14eec9cc4a12d0fb10c9f8e27e\transformed\jetified-soloader-0.10.5\AndroidManifest.xml:11:5-15:19
 MERGED from [com.facebook.soloader:soloader:0.10.5] C:\Users\ASUS\.gradle\caches\transforms-4\c5277b14eec9cc4a12d0fb10c9f8e27e\transformed\jetified-soloader-0.10.5\AndroidManifest.xml:11:5-15:19
 	android:extractNativeLibs
-		INJECTED from D:\Maifun's Project\fs-mobile\rnfullstack\android\app\src\debug\AndroidManifest.xml
+		INJECTED from D:\New folder\fs-mobile\rnfullstack\android\app\src\debug\AndroidManifest.xml
 	android:appComponentFactory
 		ADDED from [androidx.core:core:1.9.0] C:\Users\ASUS\.gradle\caches\transforms-4\6621c239d1e00abea0752787fff99403\transformed\core-1.9.0\AndroidManifest.xml:28:18-86
 	android:label
-		ADDED from D:\Maifun's Project\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:7:7-39
-		ADDED from D:\Maifun's Project\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:7:7-39
+		ADDED from D:\New folder\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:7:7-39
+		ADDED from D:\New folder\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:7:7-39
 	tools:ignore
-		ADDED from D:\Maifun's Project\fs-mobile\rnfullstack\android\app\src\debug\AndroidManifest.xml:8:9-48
+		ADDED from D:\New folder\fs-mobile\rnfullstack\android\app\src\debug\AndroidManifest.xml:8:9-48
 	android:roundIcon
-		ADDED from D:\Maifun's Project\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:9:7-52
-		ADDED from D:\Maifun's Project\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:9:7-52
+		ADDED from D:\New folder\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:9:7-52
+		ADDED from D:\New folder\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:9:7-52
 	tools:targetApi
-		ADDED from D:\Maifun's Project\fs-mobile\rnfullstack\android\app\src\debug\AndroidManifest.xml:7:9-29
+		ADDED from D:\New folder\fs-mobile\rnfullstack\android\app\src\debug\AndroidManifest.xml:7:9-29
 	android:icon
-		ADDED from D:\Maifun's Project\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:8:7-41
-		ADDED from D:\Maifun's Project\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:8:7-41
+		ADDED from D:\New folder\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:8:7-41
+		ADDED from D:\New folder\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:8:7-41
 	android:allowBackup
-		ADDED from D:\Maifun's Project\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:10:7-34
-		ADDED from D:\Maifun's Project\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:10:7-34
+		ADDED from D:\New folder\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:10:7-34
+		ADDED from D:\New folder\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:10:7-34
 	android:theme
-		ADDED from D:\Maifun's Project\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:11:7-38
-		ADDED from D:\Maifun's Project\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:11:7-38
+		ADDED from D:\New folder\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:11:7-38
+		ADDED from D:\New folder\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:11:7-38
 	android:usesCleartextTraffic
-		ADDED from D:\Maifun's Project\fs-mobile\rnfullstack\android\app\src\debug\AndroidManifest.xml:6:9-44
+		ADDED from D:\New folder\fs-mobile\rnfullstack\android\app\src\debug\AndroidManifest.xml:6:9-44
 	android:name
-		ADDED from D:\Maifun's Project\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:6:7-38
-		ADDED from D:\Maifun's Project\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:6:7-38
+		ADDED from D:\New folder\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:6:7-38
+		ADDED from D:\New folder\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:6:7-38
 activity#com.rnfullstack.MainActivity
-ADDED from D:\Maifun's Project\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:12:7-23:18
+ADDED from D:\New folder\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:12:7-23:18
 	android:label
-		ADDED from D:\Maifun's Project\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:14:9-41
+		ADDED from D:\New folder\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:14:9-41
 	android:launchMode
-		ADDED from D:\Maifun's Project\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:16:9-40
+		ADDED from D:\New folder\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:16:9-40
 	android:windowSoftInputMode
-		ADDED from D:\Maifun's Project\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:17:9-51
+		ADDED from D:\New folder\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:17:9-51
 	android:exported
-		ADDED from D:\Maifun's Project\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:18:9-32
+		ADDED from D:\New folder\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:18:9-32
 	android:configChanges
-		ADDED from D:\Maifun's Project\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:15:9-118
+		ADDED from D:\New folder\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:15:9-118
 	android:name
-		ADDED from D:\Maifun's Project\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:13:9-37
+		ADDED from D:\New folder\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:13:9-37
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from D:\Maifun's Project\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:19:9-22:25
+ADDED from D:\New folder\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:19:9-22:25
 action#android.intent.action.MAIN
-ADDED from D:\Maifun's Project\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:20:13-65
+ADDED from D:\New folder\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:20:13-65
 	android:name
-		ADDED from D:\Maifun's Project\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:20:21-62
+		ADDED from D:\New folder\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:20:21-62
 category#android.intent.category.LAUNCHER
-ADDED from D:\Maifun's Project\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:21:13-73
+ADDED from D:\New folder\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:21:13-73
 	android:name
-		ADDED from D:\Maifun's Project\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:21:23-70
+		ADDED from D:\New folder\fs-mobile\rnfullstack\android\app\src\main\AndroidManifest.xml:21:23-70
 uses-sdk
-INJECTED from D:\Maifun's Project\fs-mobile\rnfullstack\android\app\src\debug\AndroidManifest.xml reason: use-sdk injection requested
-INJECTED from D:\Maifun's Project\fs-mobile\rnfullstack\android\app\src\debug\AndroidManifest.xml
-INJECTED from D:\Maifun's Project\fs-mobile\rnfullstack\android\app\src\debug\AndroidManifest.xml
-MERGED from [:react-native-gesture-handler] D:\Maifun's Project\fs-mobile\rnfullstack\node_modules\react-native-gesture-handler\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
-MERGED from [:react-native-gesture-handler] D:\Maifun's Project\fs-mobile\rnfullstack\node_modules\react-native-gesture-handler\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
-MERGED from [:react-native-safe-area-context] D:\Maifun's Project\fs-mobile\rnfullstack\node_modules\react-native-safe-area-context\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
-MERGED from [:react-native-safe-area-context] D:\Maifun's Project\fs-mobile\rnfullstack\node_modules\react-native-safe-area-context\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
-MERGED from [:react-native-screens] D:\Maifun's Project\fs-mobile\rnfullstack\node_modules\react-native-screens\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
-MERGED from [:react-native-screens] D:\Maifun's Project\fs-mobile\rnfullstack\node_modules\react-native-screens\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
+INJECTED from D:\New folder\fs-mobile\rnfullstack\android\app\src\debug\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from D:\New folder\fs-mobile\rnfullstack\android\app\src\debug\AndroidManifest.xml
+INJECTED from D:\New folder\fs-mobile\rnfullstack\android\app\src\debug\AndroidManifest.xml
+MERGED from [:react-native-gesture-handler] D:\New folder\fs-mobile\rnfullstack\node_modules\react-native-gesture-handler\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:react-native-gesture-handler] D:\New folder\fs-mobile\rnfullstack\node_modules\react-native-gesture-handler\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:react-native-safe-area-context] D:\New folder\fs-mobile\rnfullstack\node_modules\react-native-safe-area-context\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:react-native-safe-area-context] D:\New folder\fs-mobile\rnfullstack\node_modules\react-native-safe-area-context\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:react-native-screens] D:\New folder\fs-mobile\rnfullstack\node_modules\react-native-screens\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:react-native-screens] D:\New folder\fs-mobile\rnfullstack\node_modules\react-native-screens\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [com.facebook.react:react-android:0.74.2] C:\Users\ASUS\.gradle\caches\transforms-4\716f968cc1e5225035406d1e56ec874f\transformed\jetified-react-android-0.74.2-debug\AndroidManifest.xml:10:5-44
 MERGED from [com.facebook.react:react-android:0.74.2] C:\Users\ASUS\.gradle\caches\transforms-4\716f968cc1e5225035406d1e56ec874f\transformed\jetified-react-android-0.74.2-debug\AndroidManifest.xml:10:5-44
 MERGED from [androidx.appcompat:appcompat-resources:1.6.1] C:\Users\ASUS\.gradle\caches\transforms-4\bcd1aaab3390fd5a0905d07d3a934f98\transformed\jetified-appcompat-resources-1.6.1\AndroidManifest.xml:20:5-44
@@ -291,9 +291,9 @@ MERGED from [com.facebook.fbjni:fbjni:0.6.0] C:\Users\ASUS\.gradle\caches\transf
 MERGED from [com.facebook.soloader:soloader:0.10.5] C:\Users\ASUS\.gradle\caches\transforms-4\c5277b14eec9cc4a12d0fb10c9f8e27e\transformed\jetified-soloader-0.10.5\AndroidManifest.xml:7:5-9:41
 MERGED from [com.facebook.soloader:soloader:0.10.5] C:\Users\ASUS\.gradle\caches\transforms-4\c5277b14eec9cc4a12d0fb10c9f8e27e\transformed\jetified-soloader-0.10.5\AndroidManifest.xml:7:5-9:41
 	android:targetSdkVersion
-		INJECTED from D:\Maifun's Project\fs-mobile\rnfullstack\android\app\src\debug\AndroidManifest.xml
+		INJECTED from D:\New folder\fs-mobile\rnfullstack\android\app\src\debug\AndroidManifest.xml
 	android:minSdkVersion
-		INJECTED from D:\Maifun's Project\fs-mobile\rnfullstack\android\app\src\debug\AndroidManifest.xml
+		INJECTED from D:\New folder\fs-mobile\rnfullstack\android\app\src\debug\AndroidManifest.xml
 uses-permission#android.permission.SYSTEM_ALERT_WINDOW
 ADDED from [com.facebook.react:react-android:0.74.2] C:\Users\ASUS\.gradle\caches\transforms-4\716f968cc1e5225035406d1e56ec874f\transformed\jetified-react-android-0.74.2-debug\AndroidManifest.xml:16:5-78
 	android:name
