@@ -1,9 +1,8 @@
-import { View, Text } from 'react-native';
-import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from './screens/Home';
 import Detail from './screens/Detail';
+import AddIngredient from './screens/AddIngredient';
 
 const Stack = createNativeStackNavigator();
 
@@ -18,6 +17,11 @@ function MyStack() {
       <Stack.Screen
         name="Detail"
         component={Detail}
+      />
+      <Stack.Screen
+        name="AddIngredient"
+        component={AddIngredient}
+        options={{ title: 'Add Ingredient' }}
       />
     </Stack.Navigator>
   );
