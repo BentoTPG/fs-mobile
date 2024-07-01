@@ -34,6 +34,7 @@ app.get('/api/food_database/:menu_id', function (req, res, next) {
     }
   );
 })
+
 app.listen(5000, function () {
   console.log('CORS-enabled web server listening on port 5000')
 })
