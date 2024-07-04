@@ -1,4 +1,4 @@
-import { View, Text, Image, FlatList, Pressable, StyleSheet } from 'react-native';
+import { View, Text, Image, FlatList, Pressable, StyleSheet, Button } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 
@@ -15,6 +15,12 @@ export default function Home() {
         placeHolder: "Search",
         onChangeText: (event) => handleFilter(event.nativeEvent.text),
       },
+      headerRight: () => (
+        <Button
+          onPress={() => navigation.navigate('AddIngredient')}
+          title="Add Ingredient"
+        />
+      ),
     });
   }, [navigation, items]);
 
@@ -46,49 +52,103 @@ export default function Home() {
   }
 
   const renderItem = ({ item }) => (
-    <View style={styles.itemContainer}>
-      <Pressable onPress={() => goDetail(item.menu_id)}>
-        <Image 
-          source={{ uri: item.menu_image }}
-          style={styles.image}
-        />
-        <View style={styles.textContainer}>
-          <Text style={styles.menuName}>{item.menu_name}</Text>
-          <Text>{item.menu_detail}</Text>
+    <Pressable onPress={() => goDetail(item.menu_id)} style={styles.featureContainer}>
+      <Image 
+        source={{ uri: item.menu_image }}
+        style={styles.image}
+      />
+      <View style={styles.textContainer}>
+        <Text style={styles.menuName}>{item.menu_name}</Text>
+      </View>
+    </Pressable>
+  );
+
+  const renderRow = ({ item }) => (
+    <View style={styles.row}>
+      {item.map((menu, index) => (
+        <View key={index} style={styles.column}>
+          {renderItem({ item: menu })}
         </View>
-      </Pressable>
+      ))}
+      {item.length === 1 && <View style={[styles.column, styles.emptyColumn]} />}
     </View>
   );
 
+  const chunkArray = (array, size) => {
+    const chunkedArr = [];
+    for (let i = 0; i < array.length; i += size) {
+      chunkedArr.push(array.slice(i, i + size));
+    }
+    return chunkedArr;
+  };
+
+  const chunkedData = chunkArray(filteredItems, 2);
+
   return (
-    <View style={styles.container}>
-      <FlatList
-        data={filteredItems}
-        renderItem={renderItem}
-        keyExtractor={item => item.menu_id}
-        refreshing={isLoading}
-        onRefresh={() => setIsLoading(true)}
-      />
-    </View>
+    <FlatList
+      data={chunkedData}
+      renderItem={renderRow}
+      keyExtractor={(item, index) => index.toString()}
+      refreshing={isLoading}
+      onRefresh={() => {
+        setIsLoading(true);
+        fetch('http://10.0.2.2:5000/api/food_database')
+          .then(res => res.json())
+          .then((result) => {
+            setItems(result);
+            setFilteredItems(result);
+            setIsLoading(false);
+          })
+          .catch(error => {
+            console.error('Error fetching data:', error);
+            setIsLoading(false);
+          });
+      }}
+      contentContainerStyle={styles.contentContainer}
+      showsVerticalScrollIndicator={false}
+    />
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
+  contentContainer: {
+    paddingHorizontal: 10,
+    paddingBottom: 20,
   },
-  itemContainer: {
+  row: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     marginBottom: 10,
+  },
+  column: {
+    flex: 1,
+    paddingHorizontal: 5,
+  },
+  featureContainer: {
+    backgroundColor: '#fff',
+    padding: 15,
+    borderRadius: 10,
+    shadowColor: '#000',
+    shadowOpacity: 0.1,
+    shadowOffset: { width: 0, height: 2 },
+    shadowRadius: 10,
+    elevation: 5,
+  },
+  emptyColumn: {
+    flex: 1,
   },
   image: {
     width: '100%',
-    height: 333,
+    height: 150,
+    borderRadius: 10,
+    marginBottom: 10,
   },
   textContainer: {
     padding: 10,
   },
   menuName: {
     fontSize: 20,
+    fontWeight: 'bold',
+    color: '#333',
   },
 });

@@ -48,25 +48,50 @@ app.get('/api/food_database/:menu_id', function (req, res, next) {
 app.get('/api/food_database/:menu_id/ingredients', function (req, res, next) {
   const menu_id = req.params.menu_id;
   const query = `
-    SELECT 'carbohydrates' as type, carbohydrate as name FROM carbohydrates WHERE menu_id = ?
-    UNION ALL
-    SELECT 'condiments' as type, condiment as name FROM condiments WHERE menu_id = ?
-    UNION ALL
-    SELECT 'fats' as type, fat as name FROM fats WHERE menu_id = ?
-    UNION ALL
-    SELECT 'fruits' as type, fruit as name FROM fruits WHERE menu_id = ?
-    UNION ALL
-    SELECT 'proteins' as type, protein as name FROM proteins WHERE menu_id = ?
-    UNION ALL
-    SELECT 'spices' as type, spice as name FROM spices WHERE menu_id = ?
-    UNION ALL
-    SELECT 'vegetables' as type, vegetable as name FROM vegetables WHERE menu_id = ?
+    SELECT ingredient
+    FROM ingredients_all
+    WHERE menu_id = ?
+    ORDER BY menu_id;
   `;
-  connection.query(query, [menu_id, menu_id, menu_id, menu_id, menu_id, menu_id, menu_id], function(err, results, fields) {
+  connection.query(query, [menu_id], function(err, results, fields) {
     if (err) {
       return res.status(500).json({ error: err.message });
     }
     res.json(results);
+  });
+});
+
+app.get('/api/ingredients', function (req, res, next) {
+  connection.query('SELECT * FROM ingredients', function(err, results, fields) {
+    if (err) {
+      return res.status(500).json({ error: err.message });
+    }
+    res.json(results);
+  });
+});
+
+app.post('/api/add_ingredients', function (req, res, next) {
+  const ingredients = req.body.ingredient_names; // รับข้อมูลส่วนผสมจาก body ของคำขอ
+
+  if (!ingredients) {
+    return res.status(400).json({ error: 'Invalid data' });
+  }
+
+  // ค้นหา ingredient_category สำหรับแต่ละ ingredient_name
+  const query = 'SELECT ingredient_name, ingredient_category FROM ingredients WHERE ingredient_name IN (?)';
+  connection.query(query, [ingredients], function (err, results) {
+    if (err) {
+      return res.status(500).json({ error: err.message });
+    }
+
+    const values = results.map(result => [result.ingredient_name, result.ingredient_category]);
+
+    connection.query('INSERT INTO useringredients (ingredient_name, ingredient_category) VALUES ?', [values], function (err, results) {
+      if (err) {
+        return res.status(500).json({ error: err.message });
+      }
+      res.json({ success: true, results });
+    });
   });
 });
 
