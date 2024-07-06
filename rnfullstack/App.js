@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from './screens/Home';
 import Detail from './screens/Detail';
 import AddIngredient from './screens/AddIngredient';
+import UserIngredients from './screens/UserIngredients';
 
 const Stack = createNativeStackNavigator();
 
@@ -22,6 +23,11 @@ function MyStack() {
         name="AddIngredient"
         component={AddIngredient}
         options={{ title: 'Add Ingredient' }}
+      />
+      <Stack.Screen
+        name="UserIngredients"
+        component={UserIngredients}
+        options={{ title: 'User Ingredients' }}
       />
     </Stack.Navigator>
   );
