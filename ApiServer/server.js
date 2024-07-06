@@ -70,27 +70,39 @@ app.get('/api/ingredients', function (req, res, next) {
   });
 });
 
-app.post('/api/add_ingredients', function (req, res, next) {
-  const ingredients = req.body.ingredient_names; // รับข้อมูลส่วนผสมจาก body ของคำขอ
+app.post('/api/add_ingredients', (req, res) => {
+  const ingredientNames = req.body.ingredient_names;
 
-  if (!ingredients) {
-    return res.status(400).json({ error: 'Invalid data' });
+  if (!ingredientNames || !Array.isArray(ingredientNames)) {
+    return res.status(400).json({ error: 'Invalid ingredient names' });
   }
 
-  // ค้นหา ingredient_category สำหรับแต่ละ ingredient_name
-  const query = 'SELECT ingredient_name, ingredient_category FROM ingredients WHERE ingredient_name IN (?)';
-  connection.query(query, [ingredients], function (err, results) {
+  // Check if the ingredients already exist
+  const placeholders = ingredientNames.map(() => '?').join(',');
+  const query = `SELECT ingredient_name FROM useringredients WHERE ingredient_name IN (${placeholders})`;
+
+  connection.query(query, ingredientNames, (err, results) => {
     if (err) {
       return res.status(500).json({ error: err.message });
     }
 
-    const values = results.map(result => [result.ingredient_name, result.ingredient_category]);
+    const existingIngredients = results.map(row => row.ingredient_name);
+    const newIngredients = ingredientNames.filter(name => !existingIngredients.includes(name));
 
-    connection.query('INSERT INTO useringredients (ingredient_name, ingredient_category) VALUES ?', [values], function (err, results) {
-      if (err) {
-        return res.status(500).json({ error: err.message });
+    if (newIngredients.length === 0) {
+      return res.status(200).json({ success: false, message: 'All ingredients already exist' });
+    }
+
+    // Insert new ingredients
+    const insertQuery = 'INSERT INTO useringredients (ingredient_name) VALUES ?';
+    const values = newIngredients.map(name => [name]);
+
+    connection.query(insertQuery, [values], (insertErr, insertResults) => {
+      if (insertErr) {
+        return res.status(500).json({ error: insertErr.message });
       }
-      res.json({ success: true, results });
+
+      res.status(200).json({ success: true, results: insertResults });
     });
   });
 });
@@ -98,12 +110,12 @@ app.post('/api/add_ingredients', function (req, res, next) {
 // Endpoint for fetching matching menus based on useringredients
 app.get('/api/matching_menus', function (req, res, next) {
   const query = `
-    SELECT ua.menu_id, m.menu_name, m.menu_image
+    SELECT DISTINCT ua.menu_id, m.menu_name, m.menu_image
     FROM ingredients_all ua
-    JOIN useringredients ui ON ua.ingredient = ui.ingredient_name
     JOIN menus m ON ua.menu_id = m.menu_id
-    GROUP BY ua.menu_id
-    HAVING COUNT(DISTINCT ua.ingredient) = (SELECT COUNT(DISTINCT ingredient_name) FROM useringredients WHERE ingredient_name IN (SELECT ingredient FROM ingredients_all WHERE ingredients_all.menu_id = ua.menu_id));
+    WHERE ua.ingredient IN (SELECT ingredient_name FROM useringredients)
+    GROUP BY ua.menu_id, m.menu_name, m.menu_image
+    HAVING COUNT(DISTINCT ua.ingredient) = (SELECT COUNT(DISTINCT ua2.ingredient) FROM ingredients_all ua2 WHERE ua2.menu_id = ua.menu_id);
   `;
   connection.query(query, function (err, results) {
     if (err) {
@@ -135,7 +147,14 @@ app.delete('/api/user_ingredient', function (req, res, next) {
     if (err) {
       return res.status(500).json({ error: err.message });
     }
-    res.json({ success: true });
+
+    // Reset AUTO_INCREMENT after deleting
+    connection.query('ALTER TABLE useringredients AUTO_INCREMENT = 1', function(autoErr, autoResults) {
+      if (autoErr) {
+        return res.status(500).json({ error: autoErr.message });
+      }
+      res.json({ success: true });
+    });
   });
 });
 
@@ -145,7 +164,14 @@ app.delete('/api/clear_user_ingredients', function (req, res, next) {
     if (err) {
       return res.status(500).json({ error: err.message });
     }
-    res.json({ success: true });
+
+    // Reset AUTO_INCREMENT after deleting all rows
+    connection.query('ALTER TABLE useringredients AUTO_INCREMENT = 1', function(autoErr, autoResults) {
+      if (autoErr) {
+        return res.status(500).json({ error: autoErr.message });
+      }
+      res.json({ success: true });
+    });
   });
 });
 

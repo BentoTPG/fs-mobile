@@ -11,11 +11,15 @@ export default function Home() {
   const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
-    fetchData();
+    fetchData(showFiltered);
   }, []);
 
-  const fetchData = () => {
-    fetch('http://10.0.2.2:5000/api/food_database')
+  const fetchData = (filter = false) => {
+    const apiUrl = filter
+      ? 'http://10.0.2.2:5000/api/matching_menus'
+      : 'http://10.0.2.2:5000/api/food_database';
+
+    fetch(apiUrl)
       .then(res => res.json())
       .then((result) => {
         setItems(result);
@@ -28,25 +32,9 @@ export default function Home() {
       });
   };
 
-  const fetchFilteredData = () => {
-    fetch('http://10.0.2.2:5000/api/matching_menus')
-      .then(res => res.json())
-      .then((result) => {
-        setFilteredItems(result);
-        setIsLoading(false);
-      })
-      .catch(error => {
-        console.error('Error fetching data:', error);
-        setIsLoading(false);
-      });
-  };
-
   const handleFilterToggle = () => {
-    if (showFiltered) {
-      setFilteredItems(items);
-    } else {
-      fetchFilteredData();
-    }
+    setIsLoading(true);
+    fetchData(!showFiltered);
     setShowFiltered(!showFiltered);
   };
 
@@ -130,7 +118,7 @@ export default function Home() {
         renderItem={renderRow}
         keyExtractor={(item, index) => index.toString()}
         refreshing={isLoading}
-        onRefresh={fetchData}
+        onRefresh={() => fetchData(showFiltered)}
         contentContainerStyle={styles.contentContainer}
         showsVerticalScrollIndicator={false}
       />
@@ -140,90 +128,73 @@ export default function Home() {
       />
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 10,
+    backgroundColor: '#f0f0f5', // ม่วงอ่อน
+    padding: 16,
   },
   contentContainer: {
-    paddingHorizontal: 10,
     paddingBottom: 20,
   },
-  searchContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 10,
-  },
-  searchInput: {
-    flex: 1,
-    height: 40,
-    borderColor: '#ccc',
-    borderWidth: 1,
-    borderRadius: 5,
-    paddingHorizontal: 10,
-  },
+  // ... (styles อื่นๆ เหมือนเดิม)
   addButton: {
     marginRight: 10,
-    backgroundColor: '#007BFF',
-    paddingVertical: 10,
-    paddingHorizontal: 15,
-    borderRadius: 5,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   addButtonText: {
-    color: '#fff',
+    color: '#6200EE', // ม่วงเข้ม
     fontSize: 16,
     fontWeight: 'bold',
   },
   toggleButton: {
-    padding: 10,
-    backgroundColor: '#007BFF',
-    borderRadius: 10,
+    padding: 12,
+    backgroundColor: '#6200EE', // ม่วงเข้ม
+    borderRadius: 25, // ขอบมนมากขึ้น
     alignItems: 'center',
-    marginBottom: 10,
+    marginBottom: 16,
   },
   toggleButtonText: {
-    color: '#fff',
+    color: 'white',
     fontSize: 16,
     fontWeight: 'bold',
   },
+  // ... (styles อื่นๆ เหมือนเดิม)
   row: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: 10,
+    marginBottom: 16,
   },
   column: {
     flex: 1,
-    paddingHorizontal: 5,
+    paddingHorizontal: 8,
   },
   featureContainer: {
-    backgroundColor: '#fff',
-    padding: 15,
-    borderRadius: 10,
+    backgroundColor: 'white',
+    borderRadius: 15,
     shadowColor: '#000',
-    shadowOpacity: 0.1,
-    shadowOffset: { width: 0, height: 2 },
-    shadowRadius: 10,
-    elevation: 5,
-  },
-  emptyColumn: {
-    flex: 1,
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.30,
+    shadowRadius: 4.65,
+    elevation: 8,
+    overflow: 'hidden',
   },
   image: {
     width: '100%',
-    height: 150,
-    borderRadius: 10,
-    marginBottom: 10,
+    height: 200,
+    borderTopLeftRadius: 15,
+    borderTopRightRadius: 15,
   },
   textContainer: {
-    padding: 10,
+    padding: 12,
   },
   menuName: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: '#333',
+    fontSize: 18,
+    fontWeight: '600',
+    color: '#333', // สีเทาเข้ม
   },
 });
