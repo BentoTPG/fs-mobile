@@ -5,6 +5,7 @@ MERGED from D:\NSC project\fs-mobile\rnfullstack\android\app\src\main\AndroidMan
 INJECTED from D:\NSC project\fs-mobile\rnfullstack\android\app\src\debug\AndroidManifest.xml:2:1-9:12
 INJECTED from D:\NSC project\fs-mobile\rnfullstack\android\app\src\debug\AndroidManifest.xml:2:1-9:12
 INJECTED from D:\NSC project\fs-mobile\rnfullstack\android\app\src\debug\AndroidManifest.xml:2:1-9:12
+MERGED from [:react-native-picker_picker] D:\NSC project\fs-mobile\rnfullstack\node_modules\@react-native-picker\picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-7:12
 MERGED from [:react-native-gesture-handler] D:\NSC project\fs-mobile\rnfullstack\node_modules\react-native-gesture-handler\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-7:12
 MERGED from [:react-native-safe-area-context] D:\NSC project\fs-mobile\rnfullstack\node_modules\react-native-safe-area-context\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-7:12
 MERGED from [:react-native-screens] D:\NSC project\fs-mobile\rnfullstack\node_modules\react-native-screens\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-7:12
@@ -162,6 +163,8 @@ uses-sdk
 INJECTED from D:\NSC project\fs-mobile\rnfullstack\android\app\src\debug\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from D:\NSC project\fs-mobile\rnfullstack\android\app\src\debug\AndroidManifest.xml
 INJECTED from D:\NSC project\fs-mobile\rnfullstack\android\app\src\debug\AndroidManifest.xml
+MERGED from [:react-native-picker_picker] D:\NSC project\fs-mobile\rnfullstack\node_modules\@react-native-picker\picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:react-native-picker_picker] D:\NSC project\fs-mobile\rnfullstack\node_modules\@react-native-picker\picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:react-native-gesture-handler] D:\NSC project\fs-mobile\rnfullstack\node_modules\react-native-gesture-handler\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:react-native-gesture-handler] D:\NSC project\fs-mobile\rnfullstack\node_modules\react-native-gesture-handler\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:react-native-safe-area-context] D:\NSC project\fs-mobile\rnfullstack\node_modules\react-native-safe-area-context\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44

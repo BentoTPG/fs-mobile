@@ -1,6 +1,7 @@
-import { View, Text, FlatList, Pressable, StyleSheet, Button } from 'react-native';
+import { View, Text, FlatList, Pressable, StyleSheet, Button, Image, TouchableOpacity } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
+import { Picker } from '@react-native-picker/picker'; // ต้องนำเข้าจาก '@react-native-picker/picker'
 
 export default function AddIngredient() {
   const navigation = useNavigation();
@@ -8,6 +9,60 @@ export default function AddIngredient() {
   const [isLoading, setIsLoading] = useState(true);
   const [filteredItems, setFilteredItems] = useState([]);
   const [selectedIngredients, setSelectedIngredients] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState('');
+  const [existingIngredients, setExistingIngredients] = useState([]);
+
+  useEffect(() => {
+    fetchIngredients();
+    fetchCategories();
+    fetchExistingIngredients();
+  }, []);
+
+  const fetchIngredients = () => {
+    fetch('http://10.0.2.2:5000/api/ingredients')
+      .then(res => res.json())
+      .then((result) => {
+        setItems(result);
+        setFilteredItems(result);
+        setIsLoading(false); // เปลี่ยนสถานะการโหลดเป็น false หลังจากโหลดข้อมูลเสร็จสิ้น
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+        setIsLoading(false);
+      });
+  };
+
+  const fetchCategories = () => {
+    fetch('http://10.0.2.2:5000/api/categories')
+      .then(res => res.json())
+      .then((result) => {
+        setCategories(result);
+      })
+      .catch(error => {
+        console.error('Error fetching categories:', error);
+      });
+  };
+
+  const fetchExistingIngredients = () => {
+    fetch('http://10.0.2.2:5000/api/user_ingredients')
+      .then(res => res.json())
+      .then((result) => {
+        setExistingIngredients(result.map(item => item.ingredient_name));
+      })
+      .catch(error => {
+        console.error('Error fetching user ingredients:', error);
+      });
+  };
+
+  const handleCategoryChange = (category) => {
+    setSelectedCategory(category);
+    if (category === '') {
+      setFilteredItems(items);
+    } else {
+      setFilteredItems(items.filter(item => item.Ingredient_category === category));
+    }
+  };
 
   const toggleIngredient = (ingredient) => {
     setSelectedIngredients((prevSelected) => {
@@ -20,7 +75,13 @@ export default function AddIngredient() {
   };
 
   const handleConfirm = () => {
-    console.log('Confirmed Ingredients:', selectedIngredients);
+    const newIngredients = selectedIngredients.filter(name => !existingIngredients.includes(name));
+    if (newIngredients.length === 0) {
+      alert('All selected ingredients already exist in the list');
+      return;
+    }
+
+    console.log('Confirmed Ingredients:', newIngredients);
 
     fetch('http://10.0.2.2:5000/api/add_ingredients', {
       method: 'POST',
@@ -28,7 +89,7 @@ export default function AddIngredient() {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        ingredient_names: selectedIngredients,
+        ingredient_names: newIngredients,
       }),
     })
     .then(res => res.json())
@@ -36,6 +97,7 @@ export default function AddIngredient() {
       if (response.success) {
         console.log('Ingredients added successfully:', response.results);
         setSelectedIngredients([]); // เคลียร์การเลือกหลังจากส่งข้อมูลสำเร็จ
+        fetchExistingIngredients(); // อัพเดตข้อมูล ingredients ที่มีอยู่แล้ว
       } else {
         console.error('Error adding ingredients:', response.error);
       }
@@ -59,20 +121,6 @@ export default function AddIngredient() {
     });
   }, [navigation, items]);
 
-  useEffect(() => {
-    fetch('http://10.0.2.2:5000/api/ingredients')
-      .then(res => res.json())
-      .then((result) => {
-        setItems(result);
-        setFilteredItems(result);
-        setIsLoading(false); // เปลี่ยนสถานะการโหลดเป็น false หลังจากโหลดข้อมูลเสร็จสิ้น
-      })
-      .catch(error => {
-        console.error('Error fetching data:', error);
-        setIsLoading(false);
-      });
-  }, []);
-
   const handleFilter = (searchTerm) => {
     const normalizedSearchTerm = searchTerm.toUpperCase().normalize();
     setFilteredItems(
@@ -89,6 +137,7 @@ export default function AddIngredient() {
         onPress={() => toggleIngredient(item)} 
         style={[styles.featureContainer, isSelected && styles.selectedContainer]}
       >
+        {item.Ingredient_image && <Image source={{ uri: item.Ingredient_image }} style={styles.image} />}
         <View style={styles.textContainer}>
           <Text style={styles.menuName}>{item.Ingredient_name}</Text>
         </View>
@@ -119,25 +168,22 @@ export default function AddIngredient() {
 
   return (
     <View style={styles.container}>
+      <Picker
+        selectedValue={selectedCategory}
+        onValueChange={(itemValue) => handleCategoryChange(itemValue)}
+        style={styles.picker}
+      >
+        <Picker.Item label="All" value="" />
+        {categories.map((category, index) => (
+          <Picker.Item key={index} label={category || "Unnamed Category"} value={category} />
+        ))}
+      </Picker>
       <FlatList
         data={chunkedData}
         renderItem={renderRow}
         keyExtractor={(item, index) => index.toString()}
         refreshing={isLoading}
-        onRefresh={() => {
-          setIsLoading(true);
-          fetch('http://10.0.2.2:5000/api/ingredients')
-            .then(res => res.json())
-            .then((result) => {
-              setItems(result);
-              setFilteredItems(result);
-              setIsLoading(false);
-            })
-            .catch(error => {
-              console.error('Error fetching data:', error);
-              setIsLoading(false);
-            });
-        }}
+        onRefresh={fetchIngredients}
         contentContainerStyle={styles.contentContainer}
         showsVerticalScrollIndicator={false}
       />
@@ -203,5 +249,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginTop: 16,
+  },
+  picker: {
+    height: 50,
+    width: '100%',
+    marginBottom: 10,
   },
 });
