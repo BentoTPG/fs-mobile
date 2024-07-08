@@ -1,9 +1,12 @@
+// Home.js
 import { View, Text, Image, FlatList, Pressable, StyleSheet, Button, TouchableOpacity, TextInput } from 'react-native';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useNavigation } from '@react-navigation/native';
+import { UserContext } from '../App'; // Import UserContext
 
 export default function Home() {
   const navigation = useNavigation();
+  const { user } = useContext(UserContext); // Use UserContext to get user token
   const [items, setItems] = useState([]);
   const [filteredItems, setFilteredItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -19,7 +22,11 @@ export default function Home() {
       ? 'http://10.0.2.2:5000/api/matching_menus'
       : 'http://10.0.2.2:5000/api/food_database';
 
-    fetch(apiUrl)
+    fetch(apiUrl, {
+      headers: {
+        'Authorization': `Bearer ${user.token}`, // Include token in the request
+      },
+    })
       .then(res => res.json())
       .then((result) => {
         setItems(result);
@@ -139,7 +146,6 @@ const styles = StyleSheet.create({
   contentContainer: {
     paddingBottom: 20,
   },
-  // ... (styles อื่นๆ เหมือนเดิม)
   addButton: {
     marginRight: 10,
   },
@@ -160,7 +166,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
   },
-  // ... (styles อื่นๆ เหมือนเดิม)
   row: {
     flexDirection: 'row',
     justifyContent: 'space-between',

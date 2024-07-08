@@ -1,10 +1,12 @@
+import React, { useContext, useState, useEffect } from 'react';
 import { View, Text, FlatList, Pressable, StyleSheet, Button, Image, TouchableOpacity } from 'react-native';
-import React, { useState, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { Picker } from '@react-native-picker/picker'; // ต้องนำเข้าจาก '@react-native-picker/picker'
+import { Picker } from '@react-native-picker/picker';
+import { UserContext } from '../App'; // Import UserContext
 
 export default function AddIngredient() {
   const navigation = useNavigation();
+  const { user } = useContext(UserContext); // Use UserContext
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [filteredItems, setFilteredItems] = useState([]);
@@ -20,12 +22,16 @@ export default function AddIngredient() {
   }, []);
 
   const fetchIngredients = () => {
-    fetch('http://10.0.2.2:5000/api/ingredients')
+    fetch('http://10.0.2.2:5000/api/ingredients', {
+      headers: {
+        'Authorization': `Bearer ${user.token}`,
+      },
+    })
       .then(res => res.json())
       .then((result) => {
         setItems(result);
         setFilteredItems(result);
-        setIsLoading(false); // เปลี่ยนสถานะการโหลดเป็น false หลังจากโหลดข้อมูลเสร็จสิ้น
+        setIsLoading(false);
       })
       .catch(error => {
         console.error('Error fetching data:', error);
@@ -34,7 +40,11 @@ export default function AddIngredient() {
   };
 
   const fetchCategories = () => {
-    fetch('http://10.0.2.2:5000/api/categories')
+    fetch('http://10.0.2.2:5000/api/categories', {
+      headers: {
+        'Authorization': `Bearer ${user.token}`,
+      },
+    })
       .then(res => res.json())
       .then((result) => {
         setCategories(result);
@@ -45,7 +55,11 @@ export default function AddIngredient() {
   };
 
   const fetchExistingIngredients = () => {
-    fetch('http://10.0.2.2:5000/api/user_ingredients')
+    fetch('http://10.0.2.2:5000/api/user_ingredients', {
+      headers: {
+        'Authorization': `Bearer ${user.token}`,
+      },
+    })
       .then(res => res.json())
       .then((result) => {
         setExistingIngredients(result.map(item => item.ingredient_name));
@@ -81,23 +95,30 @@ export default function AddIngredient() {
       return;
     }
 
-    console.log('Confirmed Ingredients:', newIngredients);
+    console.log('Sending ingredient_names:', newIngredients);
+    console.log('Sending user_id:', user.user_id);
 
     fetch('http://10.0.2.2:5000/api/add_ingredients', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${user.token}`,
       },
       body: JSON.stringify({
         ingredient_names: newIngredients,
+        user_id: user.user_id, // ตรวจสอบให้แน่ใจว่า user_id ถูกส่งอย่างถูกต้อง
       }),
     })
-    .then(res => res.json())
+    .then(res => {
+      if (!res.ok) {
+        return res.text().then(text => { throw new Error(text) });
+      }
+      return res.json();
+    })
     .then(response => {
       if (response.success) {
-        console.log('Ingredients added successfully:', response.results);
-        setSelectedIngredients([]); // เคลียร์การเลือกหลังจากส่งข้อมูลสำเร็จ
-        fetchExistingIngredients(); // อัพเดตข้อมูล ingredients ที่มีอยู่แล้ว
+        setSelectedIngredients([]);
+        fetchExistingIngredients();
       } else {
         console.error('Error adding ingredients:', response.error);
       }
@@ -193,7 +214,7 @@ export default function AddIngredient() {
       </View>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {

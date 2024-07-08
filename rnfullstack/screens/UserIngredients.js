@@ -1,9 +1,11 @@
 import { View, Text, FlatList, Button, StyleSheet, Alert, TouchableOpacity, TextInput } from 'react-native';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useNavigation } from '@react-navigation/native';
+import { UserContext } from '../App';
 
 export default function UserIngredients() {
   const navigation = useNavigation();
+  const { user } = useContext(UserContext); // ใช้ UserContext เพื่อรับ user token
   const [userIngredients, setUserIngredients] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
@@ -14,7 +16,11 @@ export default function UserIngredients() {
   }, []);
 
   const fetchUserIngredients = () => {
-    fetch('http://10.0.2.2:5000/api/user_ingredients')
+    fetch('http://10.0.2.2:5000/api/user_ingredients', {
+      headers: {
+        'Authorization': `Bearer ${user.token}`, // รวม token ในคำขอ
+      },
+    })
       .then(res => res.json())
       .then((result) => {
         setUserIngredients(result);
@@ -30,6 +36,9 @@ export default function UserIngredients() {
   const clearUserIngredients = () => {
     fetch('http://10.0.2.2:5000/api/clear_user_ingredients', {
       method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${user.token}`, // รวม token ในคำขอ
+      },
     })
       .then(res => res.json())
       .then(response => {
@@ -52,6 +61,7 @@ export default function UserIngredients() {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${user.token}`, // รวม token ในคำขอ
       },
       body: JSON.stringify({ ingredient_name: ingredientName }),
     })

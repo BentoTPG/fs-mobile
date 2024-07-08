@@ -1,8 +1,10 @@
 import { View, Text, Image, ScrollView, StyleSheet } from 'react-native';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { fetchMenuById, fetchMenuIngredients } from '../api';
+import { UserContext } from '../App';
 
 const Detail = ({ route }) => {
+  const { user } = useContext(UserContext);
   const [item, setItem] = useState({});
   const [ingredients, setIngredients] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -11,8 +13,8 @@ const Detail = ({ route }) => {
     const menu_id = route.params.menu_id;
 
     Promise.all([
-      fetchMenuById(menu_id),
-      fetchMenuIngredients(menu_id)
+      fetchMenuById(menu_id, user.token),
+      fetchMenuIngredients(menu_id, user.token)
     ])
     .then(([menuData, ingredientsData]) => {
       setItem(menuData);
@@ -23,7 +25,7 @@ const Detail = ({ route }) => {
       console.error('Error fetching data:', error);
       setIsLoading(false);
     });
-  }, [route.params.menu_id]);
+  }, [route.params.menu_id, user.token]);
 
   return (
     <ScrollView style={styles.container}>

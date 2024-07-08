@@ -38,3 +38,4 @@ com.rnfullstack.app-packaged_res-36 D:\NSC project\fs-mobile\rnfullstack\node_mo
 com.rnfullstack.app-packaged_res-37 D:\NSC project\fs-mobile\rnfullstack\node_modules\react-native-gesture-handler\android\build\intermediates\packaged_res\debug
 com.rnfullstack.app-packaged_res-38 D:\NSC project\fs-mobile\rnfullstack\node_modules\react-native-safe-area-context\android\build\intermediates\packaged_res\debug
 com.rnfullstack.app-packaged_res-39 D:\NSC project\fs-mobile\rnfullstack\node_modules\react-native-screens\android\build\intermediates\packaged_res\debug
+com.rnfullstack.app-packaged_res-40 D:\NSC project\fs-mobile\rnfullstack\node_modules\react-native-vector-icons\android\build\intermediates\packaged_res\debug
