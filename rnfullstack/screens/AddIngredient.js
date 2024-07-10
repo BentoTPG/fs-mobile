@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { View, Text, FlatList, Pressable, StyleSheet, Button, Image, TouchableOpacity } from 'react-native';
+import { View, Text, FlatList, Pressable, StyleSheet, Button, Image, TextInput } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Picker } from '@react-native-picker/picker';
 import { UserContext } from '../App'; // Import UserContext
@@ -14,6 +14,7 @@ export default function AddIngredient() {
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('');
   const [existingIngredients, setExistingIngredients] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     fetchIngredients();
@@ -22,31 +23,33 @@ export default function AddIngredient() {
   }, []);
 
   const fetchIngredients = () => {
-    fetch('http://10.0.2.2:5000/api/ingredients', {
+    fetch('https://fridgetofeast-a95f6e626f53.herokuapp.com/api/ingredients', {
       headers: {
         'Authorization': `Bearer ${user.token}`,
       },
     })
       .then(res => res.json())
       .then((result) => {
+        console.log('Ingredients fetched:', result);
         setItems(result);
         setFilteredItems(result);
         setIsLoading(false);
       })
       .catch(error => {
-        console.error('Error fetching data:', error);
+        console.error('Error fetching ingredients:', error);
         setIsLoading(false);
       });
   };
 
   const fetchCategories = () => {
-    fetch('http://10.0.2.2:5000/api/categories', {
+    fetch('https://fridgetofeast-a95f6e626f53.herokuapp.com/api/categories', {
       headers: {
         'Authorization': `Bearer ${user.token}`,
       },
     })
       .then(res => res.json())
       .then((result) => {
+        console.log('Categories fetched:', result);
         setCategories(result);
       })
       .catch(error => {
@@ -55,14 +58,15 @@ export default function AddIngredient() {
   };
 
   const fetchExistingIngredients = () => {
-    fetch('http://10.0.2.2:5000/api/user_ingredients', {
+    fetch('https://fridgetofeast-a95f6e626f53.herokuapp.com/api/user_ingredients', {
       headers: {
         'Authorization': `Bearer ${user.token}`,
       },
     })
       .then(res => res.json())
       .then((result) => {
-        setExistingIngredients(result.map(item => item.ingredient_name));
+        console.log('User ingredients fetched:', result);
+        setExistingIngredients(result.map(item => item.Ingredient_name));
       })
       .catch(error => {
         console.error('Error fetching user ingredients:', error);
@@ -94,11 +98,11 @@ export default function AddIngredient() {
       alert('All selected ingredients already exist in the list');
       return;
     }
-
-    console.log('Sending ingredient_names:', newIngredients);
-    console.log('Sending user_id:', user.user_id);
-
-    fetch('http://10.0.2.2:5000/api/add_ingredients', {
+  
+    console.log('Sending new ingredient names:', newIngredients);
+    console.log('Sending user ID:', user.user_id);
+  
+    fetch('https://fridgetofeast-a95f6e626f53.herokuapp.com/api/add_ingredients', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -106,25 +110,23 @@ export default function AddIngredient() {
       },
       body: JSON.stringify({
         ingredient_names: newIngredients,
-        user_id: user.user_id, // ตรวจสอบให้แน่ใจว่า user_id ถูกส่งอย่างถูกต้อง
+        user_id: user.user_id,
       }),
     })
-    .then(res => {
-      if (!res.ok) {
-        return res.text().then(text => { throw new Error(text) });
-      }
-      return res.json();
-    })
+    .then(res => res.json())
     .then(response => {
       if (response.success) {
         setSelectedIngredients([]);
         fetchExistingIngredients();
+        navigation.navigate('Home'); // Navigate to Home screen after confirmation
       } else {
         console.error('Error adding ingredients:', response.error);
+        alert(`Error adding ingredients: ${response.error}`);
       }
     })
     .catch(error => {
       console.error('Error sending data:', error);
+      alert(`Error sending data: ${error.message}`);
     });
   };
 
@@ -132,24 +134,27 @@ export default function AddIngredient() {
     setSelectedIngredients([]);
   };
 
+  const handleSearch = (text) => {
+    setSearchTerm(text);
+    const normalizedText = text.toLowerCase();
+    setFilteredItems(items.filter(item => item.Ingredient_name.toLowerCase().includes(normalizedText)));
+  };
+
   React.useLayoutEffect(() => {
     navigation.setOptions({
       headerLargeTitle: true,
-      headerSearchBarOptions: {
-        placeHolder: "Search",
-        onChangeText: (event) => handleFilter(event.nativeEvent.text),
-      },
+      headerRight: () => (
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <TextInput
+            style={styles.searchInput}
+            placeholder="Search"
+            value={searchTerm}
+            onChangeText={(text) => handleSearch(text)}
+          />
+        </View>
+      ),
     });
-  }, [navigation, items]);
-
-  const handleFilter = (searchTerm) => {
-    const normalizedSearchTerm = searchTerm.toUpperCase().normalize();
-    setFilteredItems(
-      items.filter((item) => 
-        item.Ingredient_name.toUpperCase().normalize().includes(normalizedSearchTerm)
-      )
-    );
-  };
+  }, [navigation, items, searchTerm]);
 
   const renderItem = ({ item }) => {
     const isSelected = selectedIngredients.includes(item.Ingredient_name);
@@ -195,9 +200,9 @@ export default function AddIngredient() {
         style={styles.picker}
       >
         <Picker.Item label="All" value="" />
-        {categories.map((category, index) => (
+        {categories && categories.length > 0 ? categories.map((category, index) => (
           <Picker.Item key={index} label={category || "Unnamed Category"} value={category} />
-        ))}
+        )) : null}
       </Picker>
       <FlatList
         data={chunkedData}
@@ -275,5 +280,16 @@ const styles = StyleSheet.create({
     height: 50,
     width: '100%',
     marginBottom: 10,
+  },
+  searchInput: {
+    flex: 1,
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
+    padding: 10,
+    backgroundColor: 'white',
+    borderRadius: 10,
+    marginRight: 8,
+    fontSize: 16,
   },
 });

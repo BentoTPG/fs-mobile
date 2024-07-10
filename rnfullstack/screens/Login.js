@@ -3,44 +3,43 @@ import { StyleSheet, View, Image, TouchableOpacity, Text } from 'react-native';
 import { TextInput, Button } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import { UserContext } from '../App';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+
 
 const Login = () => {
   const navigation = useNavigation();
   const { setUser } = useContext(UserContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false); // State for showing/hiding password
 
-  const handleLogin = () => {
-    fetch('http://10.0.2.2:5000/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        email,
-        password,
-      }),
-    })
-      .then(res => res.json())
-      .then(response => {
-        if (response.status === 'ok') {
-          setUser({ user_id: response.user_id, token: response.token }); // ตั้งค่า user_id ใน UserContext
-          console.log('User context set:', response.user_id, response.token); // เพิ่มการบันทึกเพื่อการดีบั๊ก
-          navigation.navigate('Home');
-        } else {
-          alert(response.message);
-        }
-      })
-      .catch(error => {
-        console.error('Error during login:', error);
+  const handleLogin = async () => { // Use async/await for better error handling
+    try {
+      const response = await fetch('https://fridgetofeast-a95f6e626f53.herokuapp.com/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
       });
+      const data = await response.json();
+      if (data.status === 'ok') {
+        setUser({ user_id: data.user_id, token: data.token });
+        navigation.navigate('Home');
+      } else {
+        alert(data.message);
+      }
+    } catch (error) {
+      console.error('Error during login:', error);
+      alert('An error occurred during login. Please try again.'); // User-friendly error message
+    }
   };
 
   return (
     <View style={styles.container}>
-      <View style={styles.imageContainer}>
+      {/* <View style={styles.imageContainer}>
         <Image source={require('../image/ade.jpg')} style={{ width: 350, height: 187 }} />
-      </View>
+      </View> */}
       <View style={styles.inputContainer}>
         <TextInput
           label="Email"
@@ -50,12 +49,23 @@ const Login = () => {
         />
         <TextInput
           label="Password"
-          secureTextEntry
-          right={<TextInput.Icon icon="eye" />}
-          value={password}
-          onChangeText={text => setPassword(text)}
-          style={styles.input}
-        />
+          secureTextEntry={!showPassword}
+          right={
+          <TextInput.Icon
+            icon={() => (
+              <Icon 
+                name={showPassword ? 'eye-off' : 'eye'}
+                size={24}
+                color="grey"
+              />
+            )}
+            onPress={() => setShowPassword(!showPassword)}
+          />
+        }
+        value={password}
+        onChangeText={text => setPassword(text)}
+        style={styles.input}
+      />
       </View>
       <View style={styles.buttonContainer}>
         <Button mode="contained" onPress={handleLogin}>

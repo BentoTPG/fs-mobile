@@ -16,7 +16,7 @@ export default function UserIngredients() {
   }, []);
 
   const fetchUserIngredients = () => {
-    fetch('http://10.0.2.2:5000/api/user_ingredients', {
+    fetch('https://fridgetofeast-a95f6e626f53.herokuapp.com/api/user_ingredients', {
       headers: {
         'Authorization': `Bearer ${user.token}`, // รวม token ในคำขอ
       },
@@ -34,7 +34,7 @@ export default function UserIngredients() {
   };
 
   const clearUserIngredients = () => {
-    fetch('http://10.0.2.2:5000/api/clear_user_ingredients', {
+    fetch('https://fridgetofeast-a95f6e626f53.herokuapp.com/api/clear_user_ingredients', {
       method: 'DELETE',
       headers: {
         'Authorization': `Bearer ${user.token}`, // รวม token ในคำขอ
@@ -57,7 +57,7 @@ export default function UserIngredients() {
   };
 
   const deleteUserIngredient = (ingredientName) => {
-    fetch('http://10.0.2.2:5000/api/user_ingredient', {
+    fetch('https://fridgetofeast-a95f6e626f53.herokuapp.com/api/user_ingredient', {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',

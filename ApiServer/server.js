@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import mysql from 'mysql2';
 import bodyParser from 'body-parser';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
 const jsonParser = bodyParser.json();
@@ -10,12 +10,13 @@ const secret = 'fullstack-login';
 const app = express();
 
 const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: '',
-  database: 'food_database',
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
   multipleStatements: true // enable multi-statements for prepared statements
 });
+
 
 connection.connect((err) => {
   if (err) {
@@ -77,7 +78,7 @@ app.post('/login', jsonParser, (req, res, next) => {
 
     bcrypt.compare(password, users[0].password, (err, isLogin) => {
       if (isLogin) {
-        const expiresIn = 3600; // 1 hour in seconds
+        const expiresIn = 3600000;
         const token = jwt.sign({ email: users[0].email, user_id: users[0].user_id }, secret, { expiresIn }); // Add user_id to token payload
         const expiresAt = new Date(Date.now() + expiresIn * 1000).toISOString();
         res.json({ status: 'ok', message: 'login success', token, expiresAt, user_id: users[0].user_id }); // Return user_id in response
@@ -128,35 +129,35 @@ app.post('/api/add_ingredients', authenticateToken, (req, res) => {
   const user_id = req.user.user_id; // Get user_id from req.user
 
   // บันทึกค่าพารามิเตอร์เพื่อการดีบั๊ก
-  console.log('Received ingredient_names:', ingredient_names);
+  console.log('Received ingredient_names:', Ingredient_names);
   console.log('Received user_id:', user_id);
 
   // ตรวจสอบว่ามีการส่ง user_id และ ingredient_names มาหรือไม่
-  if (!ingredient_names || !Array.isArray(ingredient_names) || !user_id) {
+  if (!Ingredient_names || !Array.isArray(Ingredient_names) || !user_id) {
     return res.status(400).json({ error: 'Invalid ingredient names or user_id' });
   }
 
   const placeholders = ingredient_names.map(() => '?').join(',');
-  const query = `SELECT ingredient_name FROM useringredients WHERE ingredient_name IN (${placeholders}) AND user_id = ?`;
+  const query = `SELECT Ingredient_name FROM useringredients WHERE Ingredient_name IN (${placeholders}) AND user_id = ?`;
 
   // บันทึกค่าพารามิเตอร์ query เพื่อการดีบั๊ก
   console.log('Executing query:', query);
-  console.log('Query parameters:', [...ingredient_names, user_id]);
+  console.log('Query parameters:', [...Ingredient_names, user_id]);
 
-  connection.execute(query, [...ingredient_names, user_id], (err, results) => {
+  connection.execute(query, [...Ingredient_names, user_id], (err, results) => {
     if (err) {
       console.error('Database query error:', err); // เพิ่มการบันทึกข้อผิดพลาด
       return res.status(500).json({ error: err.message });
     }
 
-    const existingIngredients = results.map(row => row.ingredient_name);
-    const newIngredients = ingredient_names.filter(name => !existingIngredients.includes(name));
+    const existingIngredients = results.map(row => row.Ingredient_name);
+    const newIngredients = Ingredient_names.filter(name => !existingIngredients.includes(name));
 
     if (newIngredients.length === 0) {
       return res.status(200).json({ success: false, message: 'All ingredients already exist' });
     }
 
-    const insertQuery = 'INSERT INTO useringredients (ingredient_name, user_id) VALUES ?';
+    const insertQuery = 'INSERT INTO useringredients (Ingredient_name, user_id) VALUES ?';
     const values = newIngredients.map(name => [name, user_id]);
 
     // บันทึกค่าพารามิเตอร์ insert เพื่อการดีบั๊ก
@@ -233,6 +234,6 @@ app.get('/api/categories', authenticateToken, (req, res, next) => {
   });
 });
 
-app.listen(5000, () => {
-  console.log('CORS-enabled web server listening on port 5000');
+app.listen(process.env.PORT || 5000, () => {
+  console.log('CORS-enabled web server listening on port', process.env.PORT || 5000);
 });

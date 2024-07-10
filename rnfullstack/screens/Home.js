@@ -1,4 +1,3 @@
-// Home.js
 import { View, Text, Image, FlatList, Pressable, StyleSheet, Button, TouchableOpacity, TextInput } from 'react-native';
 import React, { useState, useEffect, useContext } from 'react';
 import { useNavigation } from '@react-navigation/native';
@@ -19,8 +18,8 @@ export default function Home() {
 
   const fetchData = (filter = false) => {
     const apiUrl = filter
-      ? 'http://10.0.2.2:5000/api/matching_menus'
-      : 'http://10.0.2.2:5000/api/food_database';
+      ? 'https://fridgetofeast-a95f6e626f53.herokuapp.com/api/matching_menus'
+      : 'https://fridgetofeast-a95f6e626f53.herokuapp.com/api/food_database';
 
     fetch(apiUrl, {
       headers: {
@@ -62,20 +61,25 @@ export default function Home() {
   React.useLayoutEffect(() => {
     navigation.setOptions({
       headerLargeTitle: true,
-      headerSearchBarOptions: {
-        placeHolder: "Search",
-        onChangeText: (event) => handleSearch(event.nativeEvent.text),
-      },
+      headerLeft: null,
       headerRight: () => (
-        <TouchableOpacity
-          style={styles.addButton}
-          onPress={() => navigation.navigate('AddIngredient')}
-        >
-          <Text style={styles.addButtonText}>Add Ingredient</Text>
-        </TouchableOpacity>
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <TextInput
+            style={styles.searchInput}
+            placeholder="Search"
+            value={searchTerm}
+            onChangeText={handleSearch}
+          />
+          <TouchableOpacity
+            style={styles.addButton}
+            onPress={() => navigation.navigate('AddIngredient')}
+          >
+            <Text style={styles.addButtonText}>Add Ingredient</Text>
+          </TouchableOpacity>
+        </View>
       ),
     });
-  }, [navigation, items]);
+  }, [navigation, items, searchTerm]);
 
   const renderItem = ({ item }) => (
     <Pressable onPress={() => goDetail(item.menu_id)} style={styles.featureContainer}>
@@ -201,5 +205,25 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '600',
     color: '#333', // สีเทาเข้ม
+  },
+  searchInput: {
+    flex: 1,
+    backgroundColor: 'white',
+    borderRadius: 10,
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    marginRight: 8,
+    fontSize: 16,
+  },
+  searchButton: {
+    backgroundColor: '#6200EE',
+    borderRadius: 10,
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+  },
+  searchButtonText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
   },
 });

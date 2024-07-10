@@ -1,4 +1,3 @@
-// Register.js
 import React, { useState } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { TextInput, Button } from 'react-native-paper';
@@ -6,35 +5,33 @@ import { useNavigation } from '@react-navigation/native';
 
 const Register = () => {
   const navigation = useNavigation();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const [fname, setFname] = useState('');
   const [lname, setLname] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false); 
+  const [errorMessage, setErrorMessage] = useState(''); // For error messages
 
-  const handleRegister = () => {
-    fetch('http://10.0.2.2:5000/register', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        email,
-        password,
-        fname,
-        lname,
-      }),
-    })
-      .then(res => res.json())
-      .then(response => {
-        if (response.status === 'ok') {
-          navigation.navigate('Login');
-        } else {
-          alert(response.message);
-        }
-      })
-      .catch(error => {
-        console.error('Error during registration:', error);
+  const handleRegister = async () => {
+    try {
+      const response = await fetch('https://fridgetofeast-a95f6e626f53.herokuapp.com/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password, fname, lname }),
       });
+
+      const data = await response.json();
+
+      if (data.status === 'ok') {
+        setErrorMessage(''); // Clear any previous errors
+        navigation.navigate('Login');
+      } else {
+        setErrorMessage(data.message || 'Registration failed');
+      }
+    } catch (error) {
+      console.error('Error during registration:', error);
+      setErrorMessage('An error occurred. Please try again.');
+    }
   };
 
   return (
@@ -59,11 +56,22 @@ const Register = () => {
       />
       <TextInput
         label="Password"
-        secureTextEntry
+        secureTextEntry={!showPassword}
         value={password}
-        onChangeText={text => setPassword(text)}
+        onChangeText={setPassword}
         style={styles.input}
+        right={
+          <TextInput.Icon
+            icon={showPassword ? 'eye-off' : 'eye'}
+            onPress={() => setShowPassword(!showPassword)}
+          />
+        }
       />
+
+      {errorMessage !== '' && ( // Display error message conditionally
+        <Text style={styles.errorText}>{errorMessage}</Text>
+      )}
+
       <Button mode="contained" onPress={handleRegister} style={styles.button}>
         Register
       </Button>
@@ -84,5 +92,9 @@ const styles = StyleSheet.create({
   },
   button: {
     marginTop: 16,
+  },
+  errorText: {
+    color: 'red',
+    marginBottom: 10,
   },
 });
