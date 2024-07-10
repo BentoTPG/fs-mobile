@@ -1,4 +1,4 @@
-#Wed Jul 10 01:24:24 ICT 2024
+#Wed Jul 10 23:44:30 ICT 2024
 base.2=D\:\\NSC project\\fs-mobile\\rnfullstack\\android\\app\\build\\intermediates\\dex\\release\\mergeDexRelease\\classes2.dex
 path.2=classes2.dex
 base.1=D\:\\NSC project\\fs-mobile\\rnfullstack\\android\\app\\build\\intermediates\\global_synthetics_dex\\release\\classes.dex
