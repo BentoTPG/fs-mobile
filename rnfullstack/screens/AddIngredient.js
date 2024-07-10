@@ -121,7 +121,7 @@ export default function AddIngredient() {
         navigation.navigate('Home'); // Navigate to Home screen after confirmation
       } else {
         console.error('Error adding ingredients:', response.error);
-        alert(`Error adding ingredients: ${response.error}`);
+        alert(`วัตถุดิบที่คุณเพิ่ม มีอยู่แล้ว`);
       }
     })
     .catch(error => {
