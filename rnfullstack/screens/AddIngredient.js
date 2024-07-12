@@ -143,16 +143,6 @@ export default function AddIngredient() {
   React.useLayoutEffect(() => {
     navigation.setOptions({
       headerLargeTitle: true,
-      headerRight: () => (
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <TextInput
-            style={styles.searchInput}
-            placeholder="Search"
-            value={searchTerm}
-            onChangeText={(text) => handleSearch(text)}
-          />
-        </View>
-      ),
     });
   }, [navigation, items, searchTerm]);
 
@@ -194,6 +184,14 @@ export default function AddIngredient() {
 
   return (
     <View style={styles.container}>
+      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <TextInput
+            style={styles.searchInput}
+            placeholder="Search"
+            value={searchTerm}
+            onChangeText={(text) => handleSearch(text)}
+          />
+      </View>
       <Picker
         selectedValue={selectedCategory}
         onValueChange={(itemValue) => handleCategoryChange(itemValue)}

@@ -64,12 +64,6 @@ export default function Home() {
       headerLeft: null,
       headerRight: () => (
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <TextInput
-            style={styles.searchInput}
-            placeholder="Search"
-            value={searchTerm}
-            onChangeText={handleSearch}
-          />
           <TouchableOpacity
             style={styles.addButton}
             onPress={() => navigation.navigate('AddIngredient')}
@@ -116,6 +110,14 @@ export default function Home() {
 
   return (
     <View style={styles.container}>
+      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <TextInput
+            style={styles.searchInput}
+            placeholder="Search"
+            value={searchTerm}
+            onChangeText={(text) => handleSearch(text)}
+          />
+      </View>
       <TouchableOpacity
         style={styles.toggleButton}
         onPress={handleFilterToggle}
